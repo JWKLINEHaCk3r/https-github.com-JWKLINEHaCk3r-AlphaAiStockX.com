@@ -1,46 +1,42 @@
-# Project Title
+# AlphaAIStockX Backend
 
-## Description
+## Overview
 
-A brief description of the project.
+This backend powers the AI stock trading engine, portfolio management, and broker integration for AlphaAIStockX.
 
-## Installation
+## Main Features
 
-To install the project dependencies, run:
+- FastAPI REST API for trading, signals, portfolio, and webhooks
+- AI/ML signal engine stub (replace with your own model)
+- Broker integration stub (Alpaca, replace with your broker)
+- SQLite database for trades and portfolio
 
-\`\`\`bash
-npm install
-\`\`\`
+## Running Locally
 
-## Usage
+1. Install dependencies:
 
-To build the project, run:
+   ```sh
+   pip install fastapi uvicorn pydantic requests
+   ```
 
-\`\`\`bash
-npm run build
-\`\`\`
+2. Start the API:
 
-To start the development server, run:
+   ```sh
+   python ai_trader/main.py
+   ```
 
-\`\`\`bash
-npm run dev
-\`\`\`
+3. The API will be available at [http://localhost:8000](http://localhost:8000)
 
-To start the application, run:
+## Endpoints
 
-\`\`\`bash
-npm start
-\`\`\`
+- `POST /trade` — Execute a trade
+- `POST /signal` — Get AI trading signal
+- `GET /portfolio` — Get current portfolio
+- `POST /webhook` — Receive broker events
+- `GET /health` — Health check
 
-## Contributing
+## Next Steps
 
-Contributions are welcome! Please follow these steps:
-
-1.  Fork the repository.
-2.  Create a new branch.
-3.  Make your changes.
-4.  Submit a pull request.
-
-## License
-
-[MIT](LICENSE)
+- Replace stubs with real AI/ML and broker logic
+- Add authentication and user management
+- Deploy backend to a secure server (e.g., Render, AWS, Azure)
