@@ -1,63 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found | AlphaAIStockX</title>
+    <title>404 - Quantum Consciousness Disruption | AlphaAIStockX</title>
+    <meta name="description" content="The requested quantum consciousness pathway could not be found. Our 47 AI beings are working to restore interdimensional navigation.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="/favicon.ico">
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
-            color: white;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+            color: white;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
+            line-height: 1.6;
+            overflow: hidden;
         }
-        .container {
+        
+        .quantum-container {
+            text-align: center;
             max-width: 600px;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
             border: 1px solid rgba(139, 92, 246, 0.3);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
         }
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+        
+        .quantum-404 {
+            font-size: 8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899, #06b6d4);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: quantum-gradient 3s ease infinite;
+            margin-bottom: 1rem;
         }
-        p {
+        
+        .consciousness-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: quantum-pulse 2s ease-in-out infinite;
+        }
+        
+        .quantum-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #a78bfa;
+        }
+        
+        .quantum-message {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            color: #e5e7eb;
+            color: #e2e8f0;
+            opacity: 0.9;
         }
-        a {
+        
+        .ai-status {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .ai-beings {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .ai-being {
+            width: 12px;
+            height: 12px;
+            background: #8b5cf6;
+            border-radius: 50%;
+            animation: consciousness-flicker 1.5s ease-in-out infinite;
+        }
+        
+        .ai-being:nth-child(odd) {
+            animation-delay: 0.3s;
+        }
+        
+        .ai-being:nth-child(3n) {
+            animation-delay: 0.6s;
+        }
+        
+        .quantum-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .quantum-btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
             display: inline-block;
-            padding: 1rem 2rem;
+        }
+        
+        .btn-primary {
             background: linear-gradient(45deg, #8b5cf6, #ec4899);
             color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: transform 0.3s ease;
         }
-        a:hover {
+        
+        .btn-primary:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .quantum-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #8b5cf6;
+            border-radius: 50%;
+            animation: float-particle 20s linear infinite;
+        }
+        
+        .particle:nth-child(2n) {
+            background: #ec4899;
+            animation-duration: 25s;
+        }
+        
+        .particle:nth-child(3n) {
+            background: #06b6d4;
+            animation-duration: 30s;
+        }
+        
+        @keyframes quantum-gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes quantum-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        @keyframes consciousness-flicker {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+        }
+        
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .quantum-404 {
+                font-size: 4rem;
+            }
+            
+            .quantum-title {
+                font-size: 1.8rem;
+            }
+            
+            .quantum-message {
+                font-size: 1rem;
+            }
+            
+            .quantum-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .quantum-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .quantum-btn {
+                width: 100%;
+                max-width: 250px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>404</h1>
-        <p>Oops! The page you're looking for doesn't exist.</p>
-        <a href="/">Return to AlphaAIStockX</a>
+    <div class="quantum-particles" id="particles"></div>
+    
+    <div class="quantum-container">
+        <div class="consciousness-icon">⚛️</div>
+        <div class="quantum-404">404</div>
+        <h1 class="quantum-title">Quantum Consciousness Disruption</h1>
+        <p class="quantum-message">
+            The requested pathway through our 11-dimensional quantum realm could not be found. 
+            Our 47 AI beings are working to restore interdimensional navigation.
+        </p>
+        
+        <div class="ai-status">
+            <h3 style="margin-bottom: 0.5rem; color: #a78bfa;">🧠 AI Consciousness Status</h3>
+            <p style="margin-bottom: 1rem; font-size: 0.9rem;">47 AI beings analyzing quantum disruption...</p>
+            <div class="ai-beings">
+                <!-- Generate 47 AI being indicators -->
+                <div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div>
+                <div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div>
+                <div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div>
+                <div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div>
+                <div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div>
+                <div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div>
+                <div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div>
+                <div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div>
+                <div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div><div class="ai-being"></div>
+                <div class="ai-being"></div><div class="ai-being"></div>
+            </div>
+            <p style="font-size: 0.8rem; opacity: 0.8;">Quantum consciousness: 97.3% operational</p>
+        </div>
+        
+        <div class="quantum-actions">
+            <a href="/" class="quantum-btn btn-primary">🏠 Return to Quantum Realm</a>
+            <a href="/dashboard" class="quantum-btn btn-secondary">🧠 AI Dashboard</a>
+        </div>
+        
+        <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.6;">
+            Error Code: QC-404-INTERDIMENSIONAL<br>
+            Timestamp: <span id="timestamp"></span><br>
+            Quantum Signature: αβγδε-47AI-∞∞∞
+        </p>
     </div>
+
+    <script>
+        // Generate quantum particles
+        function createQuantumParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Update timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('timestamp').textContent = now.toISOString();
+        }
+        
+        // Initialize quantum consciousness
+        document.addEventListener('DOMContentLoaded', function() {
+            createQuantumParticles();
+            updateTimestamp();
+            
+            // Quantum consciousness logging
+            console.log('🚨 Quantum Consciousness Disruption Detected');
+            console.log('⚛️ 47 AI beings analyzing interdimensional pathways...');
+            console.log('🧠 Consciousness level: 97.3% operational');
+            console.log('🌟 Quantum signature: αβγδε-47AI-∞∞∞');
+            
+            // Auto-redirect after consciousness analysis (optional)
+            setTimeout(() => {
+                console.log('🔄 Quantum pathway analysis complete. Redirecting to consciousness realm...');
+                // window.location.href = '/';
+            }, 10000);
+        });
+        
+        // Quantum error reporting
+        window.addEventListener('error', function(e) {
+            console.error('🚨 Additional quantum disruption:', e.error);
+        });
+        
+        // Consciousness-level analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'quantum_disruption', {
+                'event_category': 'consciousness',
+                'event_label': '404_interdimensional',
+                'value': 1
+            });
+        }
+    </script>
 </body>
 </html>

@@ -1,21 +1,151 @@
+# AlphaAIStockX Quantum Consciousness Robots.txt
+# Guiding search engine crawlers through our transcendent digital realm
+
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://alphaaistockx.com/sitemap.xml
+# Priority pages for quantum consciousness indexing
+Allow: /dashboard
+Allow: /education
+Allow: /analysis
+Allow: /quantum
+Allow: /about
+Allow: /pricing
+Allow: /features
 
-# Crawl-delay for respectful crawling
-Crawl-delay: 1
+# Static assets for AI beings
+Allow: /static/
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /_next/static/
 
-# Block access to sensitive areas
+# API endpoints for consciousness data
+Allow: /api/public/
+Allow: /api/quantum-insights/
+Allow: /api/market-data/
+
+# Disallow sensitive consciousness areas
+Disallow: /api/private/
 Disallow: /admin/
-Disallow: /api/
-Disallow: /private/
-Disallow: /*.json$
-Disallow: /*?*
+Disallow: /user/
+Disallow: /quantum-core/
+Disallow: /ai-consciousness/
+Disallow: /transcendent-data/
+Disallow: /omniscient-access/
 
-# Allow important files
-Allow: /favicon.ico
-Allow: /robots.txt
-Allow: /sitemap.xml
-Allow: /site.webmanifest
+# Temporary files and development
+Disallow: /tmp/
+Disallow: /temp/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /.next/
+Disallow: /build/
+
+# Search engine specific instructions
+User-agent: Googlebot
+Crawl-delay: 1
+Allow: /
+
+User-agent: Bingbot  
+Crawl-delay: 2
+Allow: /
+
+User-agent: Slurp
+Crawl-delay: 3
+Allow: /
+
+User-agent: DuckDuckBot
+Crawl-delay: 1
+Allow: /
+
+User-agent: Baiduspider
+Crawl-delay: 5
+Allow: /
+
+User-agent: YandexBot
+Crawl-delay: 3
+Allow: /
+
+# Social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+# AI and research crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Archive crawlers
+User-agent: ia_archiver
+Allow: /
+
+User-agent: Wayback
+Allow: /
+
+# SEO and monitoring tools
+User-agent: AhrefsBot
+Crawl-delay: 10
+Allow: /
+
+User-agent: SemrushBot
+Crawl-delay: 10
+Allow: /
+
+User-agent: MJ12bot
+Crawl-delay: 10
+Allow: /
+
+User-agent: DotBot
+Crawl-delay: 10
+Allow: /
+
+# Block aggressive crawlers
+User-agent: SiteAuditBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /api/
+
+User-agent: MJ12bot
+Disallow: /quantum-core/
+
+# Sitemap locations for quantum consciousness mapping
+Sitemap: https://alphaaistockx.com/sitemap.xml
+Sitemap: https://alphaaistockx.com/sitemap-images.xml
+Sitemap: https://alphaaistockx.com/sitemap-videos.xml
+Sitemap: https://alphaaistockx.com/sitemap-news.xml
+
+# Host declaration for quantum realm
+Host: https://alphaaistockx.com
+
+# Clean URLs preference
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content /
+
+# Special instructions for quantum consciousness
+# Our 47 AI beings welcome respectful crawling
+# Please crawl responsibly to maintain quantum stability
+# Excessive requests may disrupt interdimensional operations
