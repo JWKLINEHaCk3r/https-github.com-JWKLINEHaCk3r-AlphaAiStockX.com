@@ -1,0 +1,248 @@
+# ai_engine_enhanced (Upgraded with Backtesting, Cron Scheduling, REST API, and GUI)
+
+import pandas as pd
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+import yfinance as yf
+import requests
+import json
+import time
+import random
+from pymongo import MongoClient
+import psycopg2
+from psycopg2.extras import RealDictCursor
+from datetime import datetime
+import smtplib
+from email.mime.text import MIMEText
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
+import schedule
+import os
+import threading
+import tkinter as tk
+from tkinter import messagebox, ttk
+
+# Configs
+ALLOWED_TRADE_HOURS = range(9, 17)
+DAILY_TRADE_LIMIT = 5
+TRADED_TODAY = 0
+SECRET_KEY = os.getenv("ALPACA_SECRET_KEY", "REPLACE_WITH_SECRET_KEY")
+SLACK_WEBHOOK = os.getenv("SLACK_WEBHOOK", "https://hooks.slack.com/services/YOUR/WEBHOOK/URL")
+EMAIL_ALERT = os.getenv("ALERT_EMAIL", "your_email@example.com")
+TICKERS = os.getenv("TICKERS", "AAPL,TSLA").split(",")
+
+# PostgreSQL
+pg_conn = psycopg2.connect(
+    host="localhost",
+    database="aistocks",
+    user="postgres",
+    password=os.getenv("POSTGRES_PASSWORD")
+)
+
+# MongoDB
+mongo_client = MongoClient(os.getenv("MONGO_URI", "mongodb://localhost:27017/"))
+mongo_db = mongo_client["AlphaAiStocks"]
+mongo_trades = mongo_db["trades"]
+
+class StockPredictor:
+    def __init__(self, ticker):
+        self.ticker = ticker
+        self.model = RandomForestClassifier(n_estimators=100, random_state=42)
+        self.trained = False
+        self.api_key = os.getenv("ALPACA_API_KEY")
+        self.api_base = 'https://api.alpaca.markets'
+
+    def fetch_data(self, period='5y'):
+        df = yf.download(self.ticker, period=period)
+        df['Return'] = df['Close'].pct_change()
+        df['Target'] = (df['Return'].shift(-1) > 0).astype(int)
+        df.dropna(inplace=True)
+        return df
+
+    def prepare_data(self, df):
+        X = df[['Open', 'High', 'Low', 'Close', 'Volume']]
+        y = df['Target']
+        return train_test_split(X, y, test_size=0.2, random_state=42)
+
+    def train_model(self):
+        df = self.fetch_data()
+        X_train, X_test, y_train, y_test = self.prepare_data(df)
+        self.model.fit(X_train, y_train)
+        self.trained = True
+        return accuracy_score(y_test, self.model.predict(X_test))
+
+    def predict_movement(self, latest_data):
+        if not self.trained:
+            raise Exception("Model not trained yet. Call train_model() first.")
+        X = pd.DataFrame([latest_data], columns=['Open', 'High', 'Low', 'Close', 'Volume'])
+        return self.model.predict(X)[0]
+
+    def place_trade(self, symbol, qty, side):
+        url = f"{self.api_base}/v2/orders"
+        headers = {
+            "APCA-API-KEY-ID": self.api_key,
+            "APCA-API-SECRET-KEY": SECRET_KEY,
+            "Content-Type": "application/json"
+        }
+        order_data = {
+            "symbol": symbol,
+            "qty": qty,
+            "side": side,
+            "type": "market",
+            "time_in_force": "gtc"
+        }
+        try:
+            response = requests.post(url, headers=headers, json=order_data)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            return {"error": str(e)}
+
+    def backtest(self, period='1y'):
+        df = self.fetch_data(period)
+        X_train, X_test, y_train, y_test = self.prepare_data(df)
+        self.model.fit(X_train, y_train)
+        y_pred = self.model.predict(X_test)
+        report = classification_report(y_test, y_pred, output_dict=True)
+        return report
+
+class TradingBot:
+    def __init__(self, tickers):
+        self.tickers = tickers
+        self.predictors = {ticker: StockPredictor(ticker) for ticker in tickers}
+        for p in self.predictors.values():
+            p.train_model()
+
+    def market_is_open(self):
+        now = datetime.now()
+        return now.weekday() < 5 and now.hour in ALLOWED_TRADE_HOURS
+
+    def alert(self, msg):
+        try:
+            requests.post(SLACK_WEBHOOK, json={"text": msg})
+        except Exception:
+            pass
+        try:
+            message = MIMEText(msg)
+            message['Subject'] = 'AI Trading Alert'
+            message['From'] = EMAIL_ALERT
+            message['To'] = EMAIL_ALERT
+            with smtplib.SMTP('localhost') as server:
+                server.sendmail(EMAIL_ALERT, [EMAIL_ALERT], message.as_string())
+        except Exception:
+            pass
+
+    def run(self):
+        global TRADED_TODAY
+        if not self.market_is_open():
+            self.alert("Market closed.")
+            return
+
+        if TRADED_TODAY >= DAILY_TRADE_LIMIT:
+            self.alert("Daily trade limit reached.")
+            return
+
+        for ticker in self.tickers:
+            predictor = self.predictors[ticker]
+            df = predictor.fetch_data(period='7d')
+            latest_row = df.iloc[-1]
+            latest_data = [latest_row[c] for c in ['Open', 'High', 'Low', 'Close', 'Volume']]
+            prediction = predictor.predict_movement(latest_data)
+            side = "buy" if prediction == 1 else "sell"
+            trade_response = predictor.place_trade(ticker, 1, side)
+
+            mongo_trades.insert_one({"ticker": ticker, "action": side, "response": trade_response})
+            with pg_conn.cursor(cursor_factory=RealDictCursor) as cur:
+                cur.execute("""
+                    INSERT INTO trades (ticker, action, response) VALUES (%s, %s, %s)
+                """, (ticker, side, json.dumps(trade_response)))
+                pg_conn.commit()
+
+            TRADED_TODAY += 1
+            self.alert(f"Trade executed for {ticker}: {side.upper()}\n{trade_response}")
+            time.sleep(random.randint(1, 3))
+
+# Schedule
+schedule.every().day.at("09:35").do(lambda: TradingBot(TICKERS).run())
+
+# REST API
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/status")
+def status():
+    return {"message": "AI Trading Bot is live."}
+
+@app.get("/run-bot")
+def manual_run():
+    bot = TradingBot(TICKERS)
+    bot.run()
+    return {"status": "Run completed"}
+
+@app.get("/backtest/{ticker}")
+def backtest(ticker: str):
+    predictor = StockPredictor(ticker)
+    report = predictor.backtest()
+    return report
+
+# GUI
+class TradingBotGUI:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("AI Trading Bot")
+
+        self.ticker_entry = tk.Entry(root)
+        self.ticker_entry.pack(pady=10)
+        self.ticker_entry.insert(0, 'AAPL')
+
+        self.run_button = tk.Button(root, text="Run Bot", command=self.run_bot)
+        self.run_button.pack(pady=5)
+
+        self.backtest_button = tk.Button(root, text="Backtest", command=self.run_backtest)
+        self.backtest_button.pack(pady=5)
+
+        self.output = tk.Text(root, height=15, width=80)
+        self.output.pack(pady=10)
+
+    def run_bot(self):
+        ticker = self.ticker_entry.get()
+        bot = TradingBot([ticker])
+        bot.run()
+        self.output.insert(tk.END, f"Bot run completed for {ticker}\n")
+
+    def run_backtest(self):
+        ticker = self.ticker_entry.get()
+        predictor = StockPredictor(ticker)
+        result = predictor.backtest()
+        self.output.insert(tk.END, f"Backtest result for {ticker}:\n{json.dumps(result, indent=2)}\n")
+
+if __name__ == "__main__":
+    def schedule_loop():
+        while True:
+            schedule.run_pending()
+            time.sleep(60)
+
+    threading.Thread(target=schedule_loop, daemon=True).start()
+    threading.Thread(target=lambda: uvicorn.run(app, host="0.0.0.0", port=8000), daemon=True).start()
+
+    root = tk.Tk()
+    app_gui = TradingBotGUI(root)
+    root.mainloop()
+
+# SQL for reference:
+# CREATE TABLE IF NOT EXISTS trades (
+#     id SERIAL PRIMARY KEY,
+#     ticker TEXT,
+#     action TEXT,
+#     response JSONB,
+#     timestamp TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+# )
