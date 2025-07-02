@@ -1,0 +1,25 @@
+# Build artifacts
+.next/
+out/
+build/
+dist/
+
+# Node modules
+node_modules/
+
+# Public assets
+public/
+
+# Generated files
+*.generated.*
+*.min.*
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Misc
+.DS_Store
+.env*
+!.env.example

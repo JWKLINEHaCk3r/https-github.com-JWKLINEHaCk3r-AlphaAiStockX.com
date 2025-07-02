@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "build": {
+    "env": {
+      "CI": "true",
+      "SITE_URL": "https://alphaaistockx.com",
+      "NEXT_PUBLIC_GA_ID": "your-google-analytics-id",
+      "NEXT_PUBLIC_ALLOW_INDEXING": "true"
+    },
+    "node": "22.x",
+    "commands": ["npm install --global pnpm", "pnpm install", "pnpm build"]
+  }
+}

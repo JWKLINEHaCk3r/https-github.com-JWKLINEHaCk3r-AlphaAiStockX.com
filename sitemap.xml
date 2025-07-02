@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://alphaaistockx.com/</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Main Trading Platform -->
+  <url>
+    <loc>https://alphaaistockx.com/trading/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- AI Features -->
+  <url>
+    <loc>https://alphaaistockx.com/ai-insights/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/ai-trading-bots/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Scanners -->
+  <url>
+    <loc>https://alphaaistockx.com/scanners/stock-scanner/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/scanners/options-flow/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/scanners/crypto-analyzer/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Analysis Tools -->
+  <url>
+    <loc>https://alphaaistockx.com/analysis/market-heatmap/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/analysis/news-analysis/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Portfolio Management -->
+  <url>
+    <loc>https://alphaaistockx.com/portfolio/optimizer/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Backtesting -->
+  <url>
+    <loc>https://alphaaistockx.com/backtesting/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+    <url>
+        <loc>https://alphaaistockx.com/features</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+  <!-- Membership & Pricing -->
+  <url>
+    <loc>https://alphaaistockx.com/pricing/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Authentication -->
+  <url>
+    <loc>https://alphaaistockx.com/auth/signin/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/auth/signup/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Legal Pages -->
+    <url>
+        <loc>https://alphaaistockx.com/privacy</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/terms-of-service/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+    <url>
+        <loc>https://alphaaistockx.com/terms</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/contact/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/about/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+    <url>
+        <loc>https://alphaaistockx.com/#features</loc>
+        <lastmod>2025-01-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://alphaaistockx.com/#about</loc>
+        <lastmod>2025-01-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://alphaaistockx.com/#pricing</loc>
+        <lastmod>2025-01-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://alphaaistockx.com/#contact</loc>
+        <lastmod>2025-01-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+</urlset>

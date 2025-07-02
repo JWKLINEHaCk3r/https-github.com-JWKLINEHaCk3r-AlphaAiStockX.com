@@ -1,0 +1,3 @@
+pnpm install
+pnpm exec eslint . --ext .js,.jsx,.ts,.tsx
+pnpm build

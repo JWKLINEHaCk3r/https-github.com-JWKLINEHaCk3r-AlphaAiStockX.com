@@ -1,0 +1,6 @@
+{
+  "hosting": "IONOS",
+  "project": "alphaaistockx.com",
+  "deployment": "static or SSR (Next.js)",
+  "notes": "Add your IONOS deployment configuration here if needed. For custom domains, SSL, or advanced features, refer to IONOS documentation."
+}

@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaAIStockX - AI-Powered Stock Trading Platform</title>
+    <meta name="description" content="Revolutionary AI-powered stock trading platform with real-time market analysis, predictive algorithms, and automated trading strategies.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="AlphaAIStockX - AI-Powered Stock Trading">
+    <meta property="og:description" content="Revolutionary AI-powered stock trading platform with real-time market analysis.">
+    <meta property="og:image" content="https://alphaaistockx.com/og-image.jpg">
+    <meta property="og:url" content="https://alphaaistockx.com">
+    
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --background: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header */
+        header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            text-decoration: none;
+        }
+        
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, rgba(15, 23, 42, 0) 70%);
+            z-index: -1;
+            animation: pulse 15s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        
+        .secondary-button {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        
+        .secondary-button:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, var(--background), rgba(15, 23, 42, 0.95));
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 0;
+            background: var(--background);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .author-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, var(--background), rgba(15, 23, 42, 0.95));
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .pricing-card.popular {
+            border-color: var(--primary);
+            position: relative;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+        
+        .pricing-header {
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        
+        .pricing-description {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            flex-grow: 1;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .pricing-features li svg {
+            width: 1rem;
+            height: 1rem;
+            color: var(--success);
+            flex-shrink: 0;
+        }
+        
+        .pricing-button {
+            width: 100%;
+            text-align: center;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            z-index: 0;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .cta p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+        }
+        
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--background);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+        }
+        
+        .social-icon svg {
+            width: 1rem;
+            height: 1rem;
+            color: var(--text);
+        }
+        
+        /* Disclaimer */
+        .disclaimer {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .disclaimer h4 {
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .disclaimer p {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                    <span>AlphaAIStockX</span>
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <a href="#" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Quantum AI-Powered Stock Trading</h1>
+            <p>Harness the power of advanced artificial intelligence to maximize your trading potential. Our platform analyzes millions of data points in real-time to deliver unparalleled market insights.</p>
+            
+            <div class="hero-buttons">
+                <a href="#" class="cta-button">Start Free Trial</a>
+                <a href="#" class="secondary-button">Watch Demo</a>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">47,892</div>
+                    <div class="stat-label">Active Traders</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">$2.8B</div>
+                    <div class="stat-label">Trading Volume</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">94%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Revolutionary Trading Features</h2>
+                <p>Our platform combines cutting-edge AI with powerful trading tools to give you the edge in today's volatile markets.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                    </div>
+                    <h3>Quantum AI Analysis</h3>
+                    <p>Our proprietary quantum computing algorithms analyze market patterns beyond human capability, identifying opportunities before they become apparent.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Real-Time Market Insights</h3>
+                    <p>Get instant notifications and analysis on market movements, news impacts, and trading opportunities as they happen.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h3>Advanced Portfolio Optimization</h3>
+                    <p>Our AI continuously rebalances your portfolio based on risk tolerance, market conditions, and performance goals.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20"></path>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3>Automated Trading Strategies</h3>
+                    <p>Deploy sophisticated trading algorithms that execute trades at optimal times based on your predefined strategies.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Predictive Market Modeling</h3>
+                    <p>Our neural networks forecast market movements with unprecedented accuracy, giving you the foresight to make informed decisions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3>Risk Management Controls</h3>
+                    <p>Sophisticated risk assessment tools help protect your investments with automated stop-losses and diversification recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Trusted by Traders Worldwide</h2>
+                <p>Hear what our community of professional and retail traders have to say about AlphaAIStockX.</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "AlphaAIStockX has completely transformed my trading strategy. The AI insights have helped me achieve consistent returns even in volatile markets. I've never seen anything this sophisticated available to retail traders."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h4>James Davidson</h4>
+                            <p>Professional Trader, 8+ years</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "As a data scientist, I'm impressed by the depth of analysis the platform provides. The quantum AI algorithms catch patterns I would never have identified manually. My portfolio has seen a 34% increase since I started using it."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SR</div>
+                        <div class="author-info">
+                            <h4>Sarah Rodriguez</h4>
+                            <p>Data Scientist & Investor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The automated trading features have saved me countless hours. I set my risk parameters and strategy preferences, and AlphaAIStockX handles the rest. The returns have been consistently better than my manual trading."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MT</div>
+                        <div class="author-info">
+                            <h4>Michael Thompson</h4>
+                            <p>Retail Investor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pricing Plans</h2>
+                <p>Choose the plan that fits your trading style and goals. All plans include our core AI technology.</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Starter</div>
+                        <div class="pricing-price">$49<span>/month</span></div>
+                        <div class="pricing-description">Perfect for new traders</div>
+                    </div>
+                    
+                    <ul class="pricing-features">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Basic AI market analysis
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Real-time market data
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            5 automated strategies
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Basic portfolio analysis
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Email support
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="cta-button pricing-button">Get Started</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <div class="pricing-name">Professional</div>
+                        <div class="pricing-price">$149<span>/month</span></div>
+                        <div class="pricing-description">For serious traders</div>
+                    </div>
+                    
+                    <ul class="pricing-features">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Advanced quantum AI analysis
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Real-time alerts & notifications
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            20 automated strategies
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Full portfolio optimization
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Risk management tools
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Priority support
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="cta-button pricing-button">Get Started</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Enterprise</div>
+                        <div class="pricing-price">$499<span>/month</span></div>
+                        <div class="pricing-description">For institutional traders</div>
+                    </div>
+                    
+                    <ul class="pricing-features">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Full quantum AI capabilities
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Custom strategy development
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Unlimited automated strategies
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Advanced risk management
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            API access
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Dedicated account manager
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="cta-button pricing-button">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta" id="contact">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Trading?</h2>
+                <p>Join thousands of traders who are already leveraging our AI technology to achieve their financial goals.</p>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="cta-button">Start Free Trial</a>
+                    <a href="#" class="secondary-button cta-secondary">Schedule Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Platform</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Roadmap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Licenses</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="disclaimer">
+                <h4>Risk Disclaimer</h4>
+                <p>Trading involves significant risk of loss and is not suitable for all investors. The use of algorithmic and/or automated trading strategies does not guarantee profits or prevent losses. Past performance is not indicative of future results.</p>
+                <p>AlphaAIStockX is not a registered investment advisor and does not provide financial advice. The information provided by our AI tools should be used as informational purposes only.</p>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 AlphaAIStockX. All rights reserved.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - AlphaAIStockX</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --background: #0f172a;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .button {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        
+        .button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-code">404</div>
+        <h1>Page Not Found</h1>
+        <p>The page you are looking for doesn't exist or has been moved.</p>
+        <a href="/" class="button">Return to Homepage</a>
+    </div>
+</body>
+</html>
+# Enable Apache Rewrite Engine
+RewriteEngine On
+
+# Allow access to all files by default
+Order Allow,Deny
+Allow from all
+
+# Set default document
+DirectoryIndex index.html index.php
+
+# Prevent directory listing
+Options -Indexes
+
+# Force HTTPS redirect
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove www prefix
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# Custom error pages
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+ErrorDocument 500 /404.html
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Set caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/html "access plus 1 day"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+</IfModule>
+
+# Prevent access to sensitive files
+<FilesMatch "^\.(?!htaccess)|\.(?:git|env|config)">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow access to index.html and other necessary files
+<FilesMatch "^(index\.html|404\.html|robots\.txt|sitemap\.xml|favicon\.ico)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Allow access to asset directories
+<DirectoryMatch "^/(images|css|js|fonts|assets)/">
+    Order Allow,Deny
+    Allow from all
+</DirectoryMatch>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://alphaaistockx.com/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Main Trading Platform -->
+  <url>
+    <loc>https://alphaaistockx.com/trading/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- AI Features -->
+  <url>
+    <loc>https://alphaaistockx.com/ai-insights/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/ai-trading-bots/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Scanners -->
+  <url>
+    <loc>https://alphaaistockx.com/scanners/stock-scanner/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/scanners/options-flow/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/scanners/crypto-analyzer/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Analysis Tools -->
+  <url>
+    <loc>https://alphaaistockx.com/analysis/market-heatmap/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/analysis/news-analysis/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Portfolio Management -->
+  <url>
+    <loc>https://alphaaistockx.com/portfolio/optimizer/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Backtesting -->
+  <url>
+    <loc>https://alphaaistockx.com/backtesting/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+    <url>
+        <loc>https://alphaaistockx.com/features</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+  <!-- Membership & Pricing -->
+  <url>
+    <loc>https://alphaaistockx.com/pricing/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Authentication -->
+  <url>
+    <loc>https://alphaaistockx.com/auth/signin/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/auth/signup/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Legal Pages -->
+    <url>
+        <loc>https://alphaaistockx.com/privacy</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/terms-of-service/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+    <url>
+        <loc>https://alphaaistockx.com/terms</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/contact/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://alphaaistockx.com/about/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
+User-agent: *
+Allow: /
+
+Sitemap: https://alphaaistockx.com/sitemap.xml
+
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+# Force HTTPS redirect
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove www redirect (optional)
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# Security Headers
+Header always set X-Content-Type-Options nosniff
+Header always set X-Frame-Options SAMEORIGIN
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+# Cache Control for Performance
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # HTML files
+    ExpiresByType text/html "access plus 1 day"
+    
+    # CSS and JavaScript
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType application/x-javascript "access plus 1 year"
+    
+    # Images
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/avif "access plus 1 year"
+    
+    # Fonts
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/eot "access plus 1 year"
+    
+    # Other assets
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType application/json "access plus 1 day"
+    ExpiresByType text/xml "access plus 1 day"
+</IfModule>
+
+# Compression for better performance
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Custom Error Pages
+ErrorDocument 404 /404.html
+ErrorDocument 500 /404.html
+ErrorDocument 403 /404.html
+
+# Prevent access to sensitive files
+<Files ".htaccess">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.log">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Enable CORS for fonts and assets (if needed)
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css|css|js)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
+
+# Optimize file serving
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+    AddType text/css .css
+    AddType image/webp .webp
+    AddType image/avif .avif
+    AddType font/woff2 .woff2
+</IfModule>
+
+# Enable Keep-Alive for better performance
+<IfModule mod_headers.c>
+    Header set Connection keep-alive
+</IfModule>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>404 - Page Not Found | AlphaAIStockX</title>
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #e5e7eb;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .home-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+        
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+            to { text-shadow: 0 0 30px rgba(139, 92, 246, 0.8); }
+        }
+        
+        @media (max-width: 768px) {
+            .error-code { font-size: 6rem; }
+            .error-title { font-size: 1.5rem; }
+            .error-container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-message">
+            The page you're looking for doesn't exist or has been moved. 
+            Let's get you back to the AlphaAIStockX trading platform.
+        </p>
+        <a href="/" class="home-button">🚀 Return to Trading Platform</a>
+    </div>
+    
+    <script>
+        // Auto-redirect after 10 seconds
+        setTimeout(function() {
+            window.location.href = '/';
+        }, 10000);
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AlphaAIStockX - Revolutionary AI-powered stock trading platform with quantum processing, neural networks, and lightning-fast execution. Join 47,000+ successful traders making consistent profits with advanced algorithms.">
+    <meta name="keywords" content="AI trading, stock trading bot, algorithmic trading, quantum AI, neural networks, automated trading, investment platform, financial AI, trading algorithms, market analysis">
+    <meta name="author" content="AlphaAIStockX">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="theme-color" content="#7c3aed">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alphaaistockx.com/">
+    <meta property="og:title" content="AlphaAIStockX - Revolutionary AI Trading Platform | Quantum Processing">
+    <meta property="og:description" content="🚀 The ultimate AI-powered stock trading platform with quantum processing and lightning-fast execution. Join 47,000+ successful traders making consistent profits!">
+    <meta property="og:image" content="https://alphaaistockx.com/og-image.jpg">
+    <meta property="og:site_name" content="AlphaAIStockX">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://alphaaistockx.com/">
+    <meta property="twitter:title" content="AlphaAIStockX - Revolutionary AI Trading Platform">
+    <meta property="twitter:description" content="🚀 The ultimate AI-powered stock trading platform with quantum processing and lightning-fast execution. Join 47,000+ successful traders!">
+    <meta property="twitter:image" content="https://alphaaistockx.com/twitter-image.jpg">
+    <meta property="twitter:site" content="@alphaaistockx">
+    <meta property="twitter:creator" content="@alphaaistockx">
+
+    <!-- Favicon and PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.png" color="#7c3aed">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.alphaaistockx.com">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+    <!-- Security and performance headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>AlphaAIStockX - Revolutionary AI Trading Platform | Quantum Processing & Neural Networks</title>
+
+    <!-- Structured Data for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "AlphaAIStockX",
+        "description": "Revolutionary AI-powered stock trading platform with quantum processing, neural networks, and lightning-fast execution",
+        "url": "https://alphaaistockx.com",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": [
+            {
+                "@type": "Offer",
+                "name": "Alpha Trader",
+                "price": "29.99",
+                "priceCurrency": "USD",
+                "description": "Fast execution, 100 trades/day, 10 AI signals"
+            },
+            {
+                "@type": "Offer", 
+                "name": "Alpha Wolf",
+                "price": "99.99",
+                "priceCurrency": "USD",
+                "description": "Ultra-fast execution, 500 trades/day, 25 signals, auto-trade"
+            },
+            {
+                "@type": "Offer",
+                "name": "Alpha Apex", 
+                "price": "299.99",
+                "priceCurrency": "USD",
+                "description": "Lightning speed (5-15ms), unlimited everything"
+            }
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "47000",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "AlphaAIStockX",
+            "url": "https://alphaaistockx.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AlphaAIStockX",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://alphaaistockx.com/logo.png"
+            }
+        },
+        "keywords": "AI trading, stock trading, automated trading, trading bot, stock analysis, market predictions, algorithmic trading, financial AI, trading platform, investment tools",
+        "featureList": [
+            "Lightning-fast trade execution (5-15ms)",
+            "AI-powered stock predictions", 
+            "Automated trading bots",
+            "Real-time market analysis",
+            "Advanced risk management",
+            "Portfolio optimization",
+            "24/7 trading automation",
+            "Professional trading tools"
+        ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: gradientShift 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+            letter-spacing: -0.02em;
+        }
+        
+        .tagline {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: #e5e7eb;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+        
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-dot.green { background: #10b981; }
+        .status-dot.blue { background: #3b82f6; }
+        .status-dot.purple { background: #8b5cf6; }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #8b5cf6;
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature-description {
+            color: #d1d5db;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 4rem 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+        
+        .disclaimer {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: #fca5a5;
+            line-height: 1.6;
+        }
+        
+        .disclaimer h3 {
+            color: #ef4444;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #ec4899, #f59e0b);
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+            to { text-shadow: 0 0 30px rgba(139, 92, 246, 0.8), 0 0 40px rgba(236, 72, 153, 0.3); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .hero-section { padding: 2rem 0; }
+            .stats-bar { gap: 1rem; }
+            .stat-item { padding: 0.5rem 1rem; font-size: 0.8rem; }
+            .features-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .feature-card { padding: 1.5rem; }
+            .disclaimer { padding: 1.5rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-bar { flex-direction: column; gap: 0.5rem; }
+            .feature-card { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+        <div style="text-align: center; padding: 2rem; background: #1a1a2e;">
+            <h1 style="color: #8b5cf6;">AlphaAIStockX</h1>
+            <p style="color: #e5e7eb;">You need to enable JavaScript to run this AI trading platform.</p>
+        </div>
+    </noscript>
+    
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="floating-orb orb-1"></div>
+        <div class="floating-orb orb-2"></div>
+        <div class="floating-orb orb-3"></div>
+    </div>
+    
+    <div class="container">
+        <div class="hero-section">
+            <h1 class="logo">AlphaAIStockX</h1>
+            <p class="tagline">Revolutionary AI-Powered Trading Platform with Quantum Processing</p>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="status-dot green"></div>
+                    <span><strong>LIVE</strong> • 47,892 Active Traders</span>
+                </div>
+                <div class="stat-item">
+                    <div class="status-dot blue"></div>
+                    <span><strong>AI PROCESSING</strong> • 2.8M Data Points/sec</span>
+                </div>
+                <div class="stat-item">
+                    <div class="status-dot purple"></div>
+                    <span><strong>QUANTUM</strong> • 5-15ms Execution</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <div class="feature-title">Quantum AI Engine</div>
+                <div class="feature-description">
+                    247M parameter neural network with 94.7% prediction accuracy. 
+                    Advanced machine learning algorithms process market data in real-time 
+                    to identify profitable trading opportunities.
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Lightning Execution</div>
+                <div class="feature-description">
+                    Ultra-fast trade execution in 5-15ms with quantum processing technology. 
+                    Beat the market with millisecond precision and capture price movements 
+                    before they happen.
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Real-time Analysis</div>
+                <div class="feature-description">
+                    Process 2.8M+ data points per second from multiple exchanges, 
+                    news sources, and social sentiment. Advanced pattern recognition 
+                    identifies trends before they emerge.
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">2025 Compliant</div>
+                <div class="feature-description">
+                    Full SEC, FINRA, and GDPR compliance with advanced security protocols. 
+                    Bank-level encryption and risk management systems protect your investments 
+                    and personal data.
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <div class="feature-title">Automated Trading Bots</div>
+                <div class="feature-description">
+                    Deploy sophisticated trading algorithms that work 24/7. 
+                    Alpha Wolf and Alpha Apex bots use advanced strategies to 
+                    maximize profits while minimizing risk.
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">Portfolio Optimization</div>
+                <div class="feature-description">
+                    AI-powered portfolio management with dynamic rebalancing. 
+                    Optimize risk-adjusted returns using modern portfolio theory 
+                    and machine learning insights.
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <button class="cta-button" onclick="alert('Platform launching soon! Join our waitlist for early access.')">
+                🚀 Start Trading with AI
+            </button>
+        </div>
+        
+        <div class="disclaimer">
+            <h3>⚠️ Important Investment Disclaimer</h3>
+            <p>
+                <strong>Risk Warning:</strong> All investments and trading involve substantial risk of loss and are not suitable for all investors. 
+                Past performance does not guarantee future results. AI predictions are based on historical data analysis and cannot guarantee future market movements.
+            </p>
+            <br>
+            <p>
+                <strong>Not Financial Advice:</strong> This platform provides educational tools, market analysis, and algorithmic trading capabilities. 
+                It does not provide personalized investment advice. Always consult with licensed financial advisors before making investment decisions.
+            </p>
+            <br>
+            <p>
+                <strong>AI Limitations:</strong> While our AI systems achieve high accuracy rates, they cannot predict all market conditions, 
+                black swan events, or unprecedented market movements. Use appropriate risk management and never invest more than you can afford to lose.
+            </p>
+            <br>
+            <p>
+                <strong>Regulatory Compliance:</strong> This platform operates under applicable financial regulations. 
+                Users are responsible for compliance with their local laws and tax obligations.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        // Service Worker for caching and offline functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+        
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            if ('performance' in window) {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                console.log('Page load time:', loadTime + 'ms');
+            }
+        });
+        
+        // Error tracking
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript error:', e.error);
+        });
+        
+        // Smooth scrolling for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <!-- Analytics placeholder -->
+    <script>
+        // Google Analytics or other analytics can be added here
+        // gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://alphaaistockx.com/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow important pages
+Allow: /trading/
+Allow: /ai-insights/
+Allow: /scanners/
+Allow: /analysis/
+Allow: /portfolio/
+Allow: /pricing/
+Allow: /auth/signin/
+Allow: /auth/signup/
+{
+  "name": "AlphaAIStockX - Revolutionary AI Trading Platform",
+  "short_name": "AlphaAIStockX",
+  "description": "Revolutionary AI-powered stock trading platform with quantum processing and neural networks",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#8b5cf6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["finance", "business", "productivity"],
+  "lang": "en-US",
+  "scope": "/",
+  "prefer_related_applications": false
+}
+const CACHE_NAME = "alphaaistockx-v1.0.0"
+const urlsToCache = [
+  "/",
+  "/index.html",
+  "/404.html",
+  "/site.webmanifest",
+  "/favicon.ico",
+  "/favicon-16x16.png",
+  "/favicon-32x32.png",
+  "/apple-touch-icon.png",
+]
+
+// Install event - cache resources
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("Opened cache")
+      return cache.addAll(urlsToCache)
+    }),
+  )
+})
+
+// Fetch event - serve from cache when offline
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      // Return cached version or fetch from network
+      if (response) {
+        return response
+      }
+      return fetch(event.request)
+    }),
+  )
+})
+
+// Activate event - clean up old caches
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            console.log("Deleting old cache:", cacheName)
+            return caches.delete(cacheName)
+          }
+        }),
+      ),
+    ),
+  )
+})
+const FeatureList = () => {
+  const features = [
+    "Live Stock Recommendations",
+    "Market Sentiment Analysis",
+    "AI-Powered Predictions",
+    "Works on Desktop and Mobile",
+  ]
+
+  return (
+    <ul className="feature-list">
+      {features.map((feature, index) => (
+        <li key={index}>✅ {feature}</li>
+      ))}
+    </ul>
+  )
+}
+
+export default FeatureList
+const Header = () => {
+  return (
+    <header className="app-header">
+      <h1>📈 AlphaAIStockX</h1>
+      <p className="tagline">Your AI-powered stock research assistant.</p>
+    </header>
+  )
+}
+
+export default Header
+const StockResult = ({ ticker }) => {
+  // This would normally fetch real data from an API
+  const mockData = {
+    price: "$" + (Math.random() * 1000).toFixed(2),
+    change: (Math.random() * 10 - 5).toFixed(2) + "%",
+    sentiment: ["Bullish", "Bearish", "Neutral"][Math.floor(Math.random() * 3)],
+    recommendation: ["Strong Buy", "Buy", "Hold", "Sell", "Strong Sell"][Math.floor(Math.random() * 5)],
+  }
+
+  return ticker ? (
+    <div className="stock-result">
+      <h2>{ticker} Analysis</h2>
+      <div className="result-card">
+        <div className="result-item">
+          <span className="label">Current Price:</span>
+          <span className="value">{mockData.price}</span>
+        </div>
+        <div className="result-item">
+          <span className="label">Daily Change:</span>
+          <span className={`value ${Number.parseFloat(mockData.change) >= 0 ? "positive" : "negative"}`}>
+            {mockData.change}
+          </span>
+        </div>
+        <div className="result-item">
+          <span className="label">AI Sentiment:</span>
+          <span className="value">{mockData.sentiment}</span>
+        </div>
+        <div className="result-item">
+          <span className="label">Recommendation:</span>
+          <span className="value recommendation">{mockData.recommendation}</span>
+        </div>
+      </div>
+      <p className="disclaimer">Note: This is simulated data for demonstration purposes.</p>
+    </div>
+  ) : null
+}
+
+export default StockResult
+"use client"
+
+import { useState } from "react"
+
+const StockSearch = ({ onSearch }) => {
+  const [ticker, setTicker] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (ticker.trim()) {
+      onSearch(ticker.toUpperCase())
+    }
+  }
+
+  return (
+    <div className="stock-search">
+      <h2>Search for a Stock</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={ticker}
+          onChange={(e) => setTicker(e.target.value)}
+          placeholder="Enter stock ticker (e.g., AAPL)"
+          className="search-input"
+        />
+        <button type="submit" className="search-button">
+          Analyze
+        </button>
+      </form>
+    </div>
+  )
+}
+
+export default StockSearch
+"use client"
+
+import { useState } from "react"
+import Header from "./components/Header"
+import FeatureList from "./components/FeatureList"
+import StockSearch from "./components/StockSearch"
+import StockResult from "./components/StockResult"
+import "./styles.css"
+
+const App = () => {
+  const [searchedTicker, setSearchedTicker] = useState("")
+
+  const handleSearch = (ticker) => {
+    setSearchedTicker(ticker)
+  }
+
+  return (
+    <div className="app-container">
+      <Header />
+      <FeatureList />
+      <StockSearch onSearch={handleSearch} />
+      <StockResult ticker={searchedTicker} />
+      <footer className="app-footer">
+        <p>
+          Visit the original repo on{" "}
+          <a href="https://github.com/JWKLINEHaCk3r/AlphaAIStockX" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+        </p>
+      </footer>
+    </div>
+  )
+}
+
+export default App
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App"
+import "./styles.css"
+
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+/* Base styles */
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Header styles */
+.app-header {
+  margin-bottom: 2rem;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+/* Feature list styles */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feature-list li {
+  padding: 0.5rem;
+  background-color: #f1f8ff;
+  border-radius: 4px;
+}
+
+/* Stock search styles */
+.stock-search {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  padding: 0.75rem;
+  width: 60%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+.search-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background-color: #2980b9;
+}
+
+/* Stock result styles */
+.stock-result {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.result-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.result-item {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+.value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.positive {
+  color: #27ae60;
+}
+
+.negative {
+  color: #e74c3c;
+}
+
+.recommendation {
+  color: #3498db;
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  color: #95a5a6;
+  margin-top: 1rem;
+}
+
+/* Footer styles */
+.app-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  .search-input {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .result-card {
+    grid-template-columns: 1fr;
+  }
+}
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Enable static exports for better CDN performance
+  output: "export",
+  trailingSlash: true,
+
+  // Image optimization for CDN
+  images: {
+    unoptimized: true,
+    domains: ["alphaaistockx.com", "cdn.alphaaistockx.com", "images.unsplash.com", "via.placeholder.com"],
+    formats: ["image/webp", "image/avif"],
+  },
+
+  // CDN and performance optimizations
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
+          },
+          {
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "origin-when-cross-origin",
+          },
+        ],
+      },
+      {
+        source: "/static/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ]
+  },
+
+  // Compress and optimize
+  compress: true,
+  poweredByHeader: false,
+
+  // CDN asset prefix for production
+  assetPrefix: process.env.NODE_ENV === "production" ? "https://cdn.alphaaistockx.com" : "",
+
+  // Simplified experimental features
+  experimental: {
+    optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
+  },
+
+  // Webpack optimizations
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      config.optimization.splitChunks = {
+        chunks: "all",
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all",
+          },
+        },
+      }
+    }
+    return config
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+}
+
+module.exports = nextConfig
+# AlphaAIStockX - Revolutionary AI Trading Platform
+
+This is a complete, standalone website for AlphaAIStockX, a revolutionary AI-powered trading platform.
+
+## Files Included
+
+- `index.html` - Main homepage with all content and styling
+- `404.html` - Custom error page
+- `.htaccess` - Server configuration with security and performance settings
+- `sitemap.xml` - SEO sitemap
+- `robots.txt` - Search engine directives
+- `site.webmanifest` - Progressive Web App manifest
+- `sw.js` - Service Worker for offline functionality
+- `favicon.png` - Vector favicon source
+- Various favicon files (ico, png) for different platforms
+
+## Installation Instructions
+
+1. Upload all files to the root directory of your web hosting
+2. Ensure your hosting has HTTPS enabled
+3. Make sure `.htaccess` file is properly uploaded (it's a hidden file)
+4. Test the website by visiting your domain
+
+## Features
+
+- Fully responsive design that works on all devices
+- Built-in SEO optimization
+- Performance optimizations (caching, compression)
+- Security headers and protections
+- Offline functionality with Service Worker
+- Progressive Web App capabilities
+
+## Customization
+
+The website is designed to be easily customizable:
+
+- All styles are contained within the HTML files
+- No external dependencies or frameworks required
+- Simple JavaScript for basic interactions
+
+## Support
+
+For any issues or questions, please contact support@alphaaistockx.com
+{
+  "name": "AlphaAIStockX - Revolutionary AI Trading Platform",
+  "short_name": "AlphaAIStockX",
+  "description": "Revolutionary AI-powered stock trading platform with quantum processing",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#8a2be2",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><text y='160' font-size='160'>🚀</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><text y='420' font-size='420'>🚀</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
+const CACHE_NAME = "alphaaistockx-v1.0.0"
+const urlsToCache = ["/", "/index.html", "/404.html", "/site.webmanifest"]
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache)))
+})
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      if (response) {
+        return response
+      }
+      return fetch(event.request)
+    }),
+  )
+})
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName)
+          }
+        }),
+      )
+    }),
+  )
+})
